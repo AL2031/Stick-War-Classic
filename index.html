@@ -3,25 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stick War Game</title>
-    <!-- Embed Ruffle Flash Player Emulator -->
-    <script src="https://unpkg.com"></script>
+    <title>Stick War 1</title>
     <style>
-        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        #flash-container { width: 800px; height: 600px; }
+        body { 
+            margin: 0; 
+            background: #000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            overflow: hidden;
+        }
+        #flash-game { 
+            width: 800px; 
+            height: 600px; 
+        }
     </style>
 </head>
 <body>
-    <div id="flash-container"></div>
+
+    <!-- Target file must be named exactly Stick_War_1.swf -->
+    <object id="flash-game" data="Stick_War_1.swf" type="application/x-shockwave-flash">
+        <param name="movie" value="Stick_War_1.swf">
+        <param name="allowScriptAccess" value="always">
+        <param name="allowFullScreen" value="true">
+    </style>
+    </object>
+
+    <!-- Ruffle auto-polyfill script -->
+    <script src="https://unpkg.com"></script>
+
     <script>
         window.RufflePlayer = window.RufflePlayer || {};
-        window.addEventListener("DOMContentLoaded", () => {
-            let ruffle = window.RufflePlayer.newest();
-            let player = ruffle.createPlayer();
-            let container = document.getElementById("flash-container");
-            container.appendChild(player);
-            player.load("Stick_War_1.swf"); // Make sure this matches your file name exactly
-        });
+        window.RufflePlayer.config = {
+            "autoplay": "on",
+            "splashScreen": false,
+            "unmuteOverlay": "hidden"
+        };
     </script>
+
 </body>
 </html>
