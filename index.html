@@ -5,41 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stick War 1</title>
     <style>
-        body { 
-            margin: 0; 
-            background: #000; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             overflow: hidden;
         }
-        #flash-game { 
-            width: 800px; 
-            height: 600px; 
+        #flash-container {
+            width: 800px;
+            height: 600px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
         }
     </style>
 </head>
 <body>
 
-    <!-- Target file must be named exactly Stick_War_1.swf -->
-    <object id="flash-game" data="Stick_War_1.swf" type="application/x-shockwave-flash">
-        <param name="movie" value="Stick_War_1.swf">
-        <param name="allowScriptAccess" value="always">
-        <param name="allowFullScreen" value="true">
-    </style>
-    </object>
+    <div id="flash-container"></div>
 
-    <!-- Ruffle auto-polyfill script -->
+    <!-- Load the Ruffle script from the CDN -->
     <script src="https://unpkg.com"></script>
 
     <script>
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.RufflePlayer.config = {
-            "autoplay": "on",
-            "splashScreen": false,
-            "unmuteOverlay": "hidden"
-        };
+        window.addEventListener("load", (event) => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("flash-container");
+            container.appendChild(player);
+            
+            // Explicitly loads your Stick War file
+            player.load("Stick_War_1.swf"); 
+        });
     </script>
 
 </body>
